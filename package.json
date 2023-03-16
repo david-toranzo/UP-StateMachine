@@ -1,7 +1,7 @@
 {
-  "name": "com..",
+  "name": "state-machine",
   "version": "1.0.0",
-  "displayName": "",
+  "displayName": "UP-StateMachine",
   "description": "",
   "unity": "2020.3",
   "unityRelease": "0b5",
