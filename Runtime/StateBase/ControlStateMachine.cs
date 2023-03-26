@@ -40,9 +40,14 @@ namespace Patterns.StateMachine
             _stateMachine.SetCurrentState(newState);
         }
 
-        private void OnDestroy()
+        public void StopStateMachine()
         {
             StopAllCoroutines();
+        }
+
+        private void OnDestroy()
+        {
+            StopStateMachine();
         }
     }
 }
