@@ -3,8 +3,10 @@ using UnityEngine;
 
 namespace Patterns.StateMachine
 {
-    public abstract class ControlStateMachine : MonoBehaviour, ISetState
+    public class StateMachineExecutor : MonoBehaviour, IStateSetter
     {
+        [SerializeField] private StateBase[] _statesBase;
+
         protected IStateMachine _stateMachine;
 
         private WaitForFixedUpdate _waitForFixedUpdate;
@@ -15,10 +17,26 @@ namespace Patterns.StateMachine
             InitStates();
             StartFixedCoroutine();
         }
-   
-        protected abstract void InitStateMachine();
 
-        protected abstract void InitStates();
+        private void InitStateMachine()
+        {
+            SetStateMoveMachine(new StateMachine());
+
+            SetCurrentState(_statesBase[0]);
+        }
+
+        private void InitStates()
+        {
+            foreach (StateBase state in _statesBase)
+            {
+                state.ConfigureSetState(this);
+            }
+        }
+
+        public void SetStateMoveMachine(IStateMachine stateMoveMachine)
+        {
+            _stateMachine = stateMoveMachine;
+        }
 
         protected void StartFixedCoroutine()
         {

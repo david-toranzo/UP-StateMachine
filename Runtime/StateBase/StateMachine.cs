@@ -1,6 +1,6 @@
 namespace Patterns.StateMachine
 {
-    public abstract class StateMachine : IStateMachine
+    public class StateMachine : IStateMachine
     {
         protected IStateBase _currentState = null;
 

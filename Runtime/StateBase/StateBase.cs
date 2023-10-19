@@ -7,9 +7,9 @@ namespace Patterns.StateMachine
         [Header("References")]
         [SerializeField] protected Transition[] _transitions;
 
-        protected ISetState _setCurrentState;
+        protected IStateSetter _setCurrentState;
 
-        public void ConfigureSetState(ISetState newSetState)
+        public void ConfigureSetState(IStateSetter newSetState)
         {
             _setCurrentState = newSetState;
         }
@@ -18,26 +18,24 @@ namespace Patterns.StateMachine
 
         public abstract void Exit();
 
-        public virtual void Stay() //fixedupdate
+        public virtual void Stay()
         {
             ProcessWorkActualState();
-
             ProcessTransition();
         }
 
         public virtual void ProcessTransition()
         {
-            foreach (Transition trans in _transitions)
+            foreach (Transition transition in _transitions)
             {
-                if (trans.GetProcessTransitionVerification())
+                if (transition.GetProcessTransitionVerification())
                 {
-                    _setCurrentState.SetCurrentState(trans.GetNextStateMove());
+                    _setCurrentState.SetCurrentState(transition.GetNextStateMove());
                     return;
                 }
             }
         }
 
         protected abstract void ProcessWorkActualState();
-
     }
 }
