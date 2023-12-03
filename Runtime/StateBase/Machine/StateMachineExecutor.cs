@@ -22,7 +22,8 @@ namespace Patterns.StateMachine
         {
             SetStateMoveMachine(new StateMachine());
 
-            SetCurrentState(_statesBase[0]);
+            if(_statesBase.Length > 0)
+                SetCurrentState(_statesBase[0]);
         }
 
         private void InitStates()
